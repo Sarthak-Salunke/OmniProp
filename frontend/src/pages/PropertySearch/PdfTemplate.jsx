@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import logo from '@/assets/OP-LOGO-(NAVBAR).png';
+const logo = '/logo-navbar.png';
 import { analyzePropertyRisks, getOverallRiskLevel, RISK_LEVELS } from '../../utils/riskAnalysis';
 import { calculateInvestmentScore } from '../../utils/investmentScoring';
 import { indianStates } from '../../data/indianStates';
@@ -39,7 +39,7 @@ const PdfTemplate = ({ data, searchCriteria }) => {
   return (
     <div className="relative">
       {/* Background Logo/Watermark */}
-      <div 
+      <div
         className="absolute inset-0 flex items-center justify-center pointer-events-none"
         style={{
           zIndex: 0,
@@ -55,10 +55,10 @@ const PdfTemplate = ({ data, searchCriteria }) => {
       </div>
 
       {/* Main Content */}
-      <div 
-        id="pdfTemplate" 
+      <div
+        id="pdfTemplate"
         className="p-8 bg-white relative"
-        style={{ 
+        style={{
           fontFamily: 'Arial, sans-serif',
           zIndex: 1,
         }}
@@ -111,13 +111,13 @@ const PdfTemplate = ({ data, searchCriteria }) => {
               <ul className="list-none pl-0">
                 <li><strong>Search Method:</strong> {
                   searchCriteria?.searchMethod === 'propertyAddress' ? 'Property Address' :
-                  searchCriteria?.searchMethod === 'ownerName' ? 'Owner/Party Name' :
-                  searchCriteria?.searchMethod === 'propertyIdentifier' ? 'Property Identifier' :
-                  searchCriteria?.searchMethod === 'registrationDetails' ? 'Registration Details' :
-                  searchCriteria?.searchMethod === 'companyName' ? 'Company Name' : 
-                  searchCriteria?.searchMethod
+                    searchCriteria?.searchMethod === 'ownerName' ? 'Owner/Party Name' :
+                      searchCriteria?.searchMethod === 'propertyIdentifier' ? 'Property Identifier' :
+                        searchCriteria?.searchMethod === 'registrationDetails' ? 'Registration Details' :
+                          searchCriteria?.searchMethod === 'companyName' ? 'Company Name' :
+                            searchCriteria?.searchMethod
                 }</li>
-                
+
                 {searchCriteria?.searchMethod === 'propertyAddress' && (
                   <>
                     {searchCriteria.plotNumber && <li><strong>Plot/House Number:</strong> {searchCriteria.plotNumber}</li>}
@@ -125,14 +125,14 @@ const PdfTemplate = ({ data, searchCriteria }) => {
                     {searchCriteria.streetName && <li><strong>Street Name:</strong> {searchCriteria.streetName}</li>}
                   </>
                 )}
-                
+
                 {searchCriteria?.searchMethod === 'ownerName' && (
                   <>
                     <li><strong>Owner Name:</strong> {searchCriteria.ownerName}</li>
                     {searchCriteria.fatherHusbandName && <li><strong>Father's/Husband's Name:</strong> {searchCriteria.fatherHusbandName}</li>}
                   </>
                 )}
-                
+
                 {searchCriteria?.propertyType && <li><strong>Property Type:</strong> {searchCriteria.propertyType}</li>}
               </ul>
             </div>
@@ -280,7 +280,7 @@ const PdfTemplate = ({ data, searchCriteria }) => {
           <h2 className="text-xl font-bold mb-4 text-primary border-b pb-2">
             Risk Analysis
           </h2>
-          <div style={{ 
+          <div style={{
             padding: '16px',
             backgroundColor: `${riskColors[overallRisk]}15`,
             border: `1px solid ${riskColors[overallRisk]}30`,
@@ -288,20 +288,20 @@ const PdfTemplate = ({ data, searchCriteria }) => {
             marginBottom: '16px'
           }}>
             <div style={{ display: 'flex', alignItems: 'center', marginBottom: '8px' }}>
-              <div style={{ 
-                width: '16px', 
-                height: '16px', 
-                borderRadius: '50%', 
+              <div style={{
+                width: '16px',
+                height: '16px',
+                borderRadius: '50%',
                 backgroundColor: riskColors[overallRisk],
                 marginRight: '8px'
               }}></div>
               <strong>Overall Risk: {overallRisk.charAt(0).toUpperCase() + overallRisk.slice(1)}</strong>
             </div>
-            
+
             {risks.length === 0 && (
               <p style={{ margin: 0 }}>No significant risks detected for this property.</p>
             )}
-            
+
             {risks.length > 0 && (
               <ul style={{ paddingLeft: '20px', margin: '8px 0 0' }}>
                 {risks.map((risk, index) => (
@@ -317,7 +317,7 @@ const PdfTemplate = ({ data, searchCriteria }) => {
           <h2 className="text-xl font-bold mb-4 text-primary border-b pb-2">
             Investment Opportunity Score
           </h2>
-          <div style={{ 
+          <div style={{
             padding: '16px',
             backgroundColor: `${ratingColors[scoreData.rating]}15`,
             border: `1px solid ${ratingColors[scoreData.rating]}30`,
@@ -325,10 +325,10 @@ const PdfTemplate = ({ data, searchCriteria }) => {
             marginBottom: '16px'
           }}>
             <div style={{ display: 'flex', alignItems: 'center', marginBottom: '16px' }}>
-              <div style={{ 
-                width: '64px', 
-                height: '64px', 
-                borderRadius: '50%', 
+              <div style={{
+                width: '64px',
+                height: '64px',
+                borderRadius: '50%',
                 backgroundColor: ratingColors[scoreData.rating],
                 display: 'flex',
                 alignItems: 'center',
@@ -343,7 +343,7 @@ const PdfTemplate = ({ data, searchCriteria }) => {
                 <p style={{ margin: 0, color: '#666' }}>Investment Opportunity Rating</p>
               </div>
             </div>
-            
+
             <h3 style={{ fontSize: '16px', marginBottom: '8px' }}>Score Breakdown</h3>
             {Object.entries(scoreData.factors).map(([key, factor]) => (
               factor.score > 0 ? (
@@ -352,16 +352,16 @@ const PdfTemplate = ({ data, searchCriteria }) => {
                     <span>{key.charAt(0).toUpperCase() + key.slice(1)} ({factor.weight * 100}%)</span>
                     <span>{factor.score}/100</span>
                   </div>
-                  <div style={{ 
-                    height: '8px', 
+                  <div style={{
+                    height: '8px',
                     backgroundColor: '#e0e0e0',
                     borderRadius: '4px',
                     overflow: 'hidden'
                   }}>
-                    <div 
-                      style={{ 
-                        height: '100%', 
-                        width: `${factor.score}%`, 
+                    <div
+                      style={{
+                        height: '100%',
+                        width: `${factor.score}%`,
                         backgroundColor: ratingColors[scoreData.rating]
                       }}
                     ></div>
@@ -380,7 +380,7 @@ const PdfTemplate = ({ data, searchCriteria }) => {
           </h2>
           <div style={{ padding: '16px', border: '1px solid #e0e0e0', borderRadius: '8px' }}>
             <p>A comprehensive neighborhood analysis was conducted to evaluate amenities within a 1km radius of the property location. Key findings include:</p>
-            
+
             <div className="grid grid-cols-2 gap-4 mt-4">
               <div>
                 <h3 style={{ fontSize: '16px', marginBottom: '8px' }}>Educational Facilities</h3>
@@ -394,7 +394,7 @@ const PdfTemplate = ({ data, searchCriteria }) => {
                   )}
                 </ul>
               </div>
-              
+
               <div>
                 <h3 style={{ fontSize: '16px', marginBottom: '8px' }}>Healthcare Facilities</h3>
                 <ul style={{ paddingLeft: '20px' }}>
@@ -407,7 +407,7 @@ const PdfTemplate = ({ data, searchCriteria }) => {
                   )}
                 </ul>
               </div>
-              
+
               <div>
                 <h3 style={{ fontSize: '16px', marginBottom: '8px' }}>Transportation</h3>
                 <ul style={{ paddingLeft: '20px' }}>
@@ -420,7 +420,7 @@ const PdfTemplate = ({ data, searchCriteria }) => {
                   )}
                 </ul>
               </div>
-              
+
               <div>
                 <h3 style={{ fontSize: '16px', marginBottom: '8px' }}>Shopping & Entertainment</h3>
                 <ul style={{ paddingLeft: '20px' }}>
@@ -434,7 +434,7 @@ const PdfTemplate = ({ data, searchCriteria }) => {
                 </ul>
               </div>
             </div>
-            
+
             <p className="mt-4" style={{ color: '#666', fontSize: '12px' }}>
               Note: For a fully interactive amenities map with additional details, please refer to the online version of this report at www.omniprop.com.
             </p>
