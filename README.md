@@ -87,6 +87,8 @@ OmniProp utilizes a **Modular Integration Layer** approach:
 3.  **Intelligence Layer**: Algorithms calculate Risk and Investment scores.
 4.  **Presentation Layer**: Highly responsive, animated UI that respects motion preferences.
 
+![OmniProp System Architecture](./docs/OmniProp_Architecture.png)
+
 ---
 
 ## 🛣️ Roadmap
