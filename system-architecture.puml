@@ -1,0 +1,47 @@
+@startuml OmniProp_Architecture
+
+skinparam componentStyle uml2
+skinparam backgroundColor #fdfae9
+skinparam packageBackgroundColor #ffffff
+
+package "Frontend Layer (React 19 + Vite)" {
+    [UI Components] <<Navbar, Footer, UI Library>>
+    [Pages] <<Home, Features, PropertySearch, Dashboard>>
+    [Context Engine] <<AuthContext, LanguageContext>>
+    [Client Logic] <<PDF Gen, Scoring, API Handler>>
+}
+
+package "Backend Layer (Node.js + Express)" {
+    [REST Controllers] <<Auth, Search, User>>
+    [Middleware] <<JWT Auth, Error Handler>>
+    package "Data Integration Engine" {
+        [Source Fetcher]
+        [Data Normalizer] <<Mapping Logic>>
+        [Analysis Toolkit] <<Risk & Scoring>>
+    }
+}
+
+database "Persistence Layer" {
+    folder "MongoDB Atlas" {
+        [User Store]
+        [Saved Search Store]
+        [Unified Property Cache]
+    }
+}
+
+cloud "External Governance Data" {
+    [DORIS API]
+    [DLR Records]
+    [CERSAI Registry]
+    [MCA21 Corporate]
+}
+
+' Interactions
+[Pages] --> [Client Logic]
+[Client Logic] --> [REST Controllers] : Axios HTTPS
+[REST Controllers] --> [Middleware]
+[Middleware] --> [Data Integration Engine]
+[Data Integration Engine] --> [External Governance Data] : Parallel Async Fetch
+[REST Controllers] --> [Persistence Layer] : Mongoose ODM
+
+@enduml
